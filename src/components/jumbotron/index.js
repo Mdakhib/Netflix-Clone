@@ -13,11 +13,7 @@ export default function Jumbotron({
   direction = "row",
   ...restProps
 }) {
-  return (
-    <Inner direction={direction}>
-      <p>{children}</p>
-    </Inner>
-  );
+  return <Inner direction={direction}>{children}</Inner>;
 }
 
 Jumbotron.Container = function JumbotronContainer({ children, ...restProps }) {
