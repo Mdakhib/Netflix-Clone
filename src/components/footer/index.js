@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import {
   Container,
@@ -33,7 +34,6 @@ Footer.Text = function FooterText({ children, ...restProps }) {
   return <Text {...restProps}>{children} </Text>;
 };
 
-Footer.Break = function FooterBreak({ children, ...restProps }) {
-  return <Break {...restProps}>{children} </Break>;
+Footer.Break = function FooterBreak({  ...restProps }) {
+  return <Break {...restProps} />;
 };
-
