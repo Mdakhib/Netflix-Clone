@@ -1,6 +1,17 @@
-import React, { createContext, useState,useContext } from "react";
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
+import React, { createContext, useState, useContext } from "react";
+import {
+  Container,
+  Inner,
+  Frame,
+  Title,
+  Item,
+  Header,
+  Body,
+} from "./styles/accordion";
 
-const ToggleContext  =  createContext();
+const ToggleContext = createContext();
 export default function Accordion({ children, ...restProps }) {
   return (
     <Container {...restProps}>
@@ -20,16 +31,15 @@ Accordion.Frame = function AccordionFrame({ children, ...restProps }) {
 Accordion.Item = function AccordionItem({ children, ...restProps }) {
   const [toggleShow, setToggleShow] = useState(false);
 
-    return (
-      <ToggleContext.Provider value={{ toggleShow, setToggleShow }}>
-        <Item {...restProps}>{children} </Item>;
-      </ToggleContext.Provider>
-    );
+  return (
+    <ToggleContext.Provider value={{ toggleShow, setToggleShow }}>
+      <Item {...restProps}>{children} </Item>;
+    </ToggleContext.Provider>
+  );
 };
 
 Accordion.Header = function AccordionHeader({ children, ...restProps }) {
-
-    const {toggleShow,setToggleShow}=useContext(ToggleContext)
+  const { toggleShow, setToggleShow } = useContext(ToggleContext);
 
   return (
     <Header
