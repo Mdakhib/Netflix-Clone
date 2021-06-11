@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import React, { isValidElement, useState } from "react";
@@ -6,13 +7,17 @@ import { FooterContainer } from "../containers/footer";
 import { Form } from "../components";
 
 export default function Signin() {
-  const [emailAddress, setemailAddress] = useState();
-  const [password, setpassword] = useState();
-  const [error, seterror] = useState();
+  const [emailAddress, setemailAddress] = useState('');
+  const [password, setpassword] = useState('');
+  const [error, seterror] = useState('');
 
+  const isInvalid = password === "" || emailAddress === "";
 
-  //check form input elements are valid
-  //email nd password
+  const handleSignin = (event) => {
+    event.preventDefault();
+  };
+
+  //firebase work here!
 
   return (
     <>
@@ -23,19 +28,29 @@ export default function Signin() {
 
           <Form.Base onSubmit={handleSignin} method="POST">
             <Form.Input
-              placeholder="Email address"
-              autoComplete='off'
+              placeholder="Email or Phone Number"
+              autoComplete="off"
               value={emailAddress}
               onChange={({ target }) => setemailAddress(target.value)}
             />
             <Form.Input
               placeholder="Password"
-              autoComplete='off'
+              autoComplete="off"
               value={password}
+              type='password'
               onChange={({ target }) => setpassword(target.value)}
             />
-            <Form.Submit disable={isInvalid} type='submit' >Sign In</Form.Submit>
+            <Form.Submit disabled={isInvalid} type="submit">
+              Sign In
+            </Form.Submit>
           </Form.Base>
+          <Form.Text>
+            New to Netflix? <Form.Link to="/signup">Sign up now</Form.Link>
+          </Form.Text>
+          <Form.TextSmall>
+            This page is protected by Google reCAPTCHA to ensure you're not a
+            bot. Learn more.
+          </Form.TextSmall>
         </Form>
       </HeaderContainer>
       <FooterContainer />;
