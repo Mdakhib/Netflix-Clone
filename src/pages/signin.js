@@ -1,11 +1,14 @@
 /* eslint-disable react/no-unescaped-entities */
 import React, { useContext, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { FirebaseContext } from "../context/firebase";
 import { HeaderContainer } from "../containers/header";
 import { FooterContainer } from "../containers/footer";
 import { Form } from "../components";
+import * as ROUTES from "../constants/routes";
 
 export default function Signin() {
+  const history = useHistory();
   const { firebase } = useContext(FirebaseContext);
   const [emailAddress, setemailAddress] = useState("");
   const [password, setpassword] = useState("");
@@ -23,6 +26,8 @@ export default function Signin() {
       .signInWithEmailAndPassword(emailAddress, password)
       .then(() => {
       //push to the browse page
+        
+        history.push(ROUTES.BROWSE);
       })
       .catch((error) => {
         setemailAddress('')
