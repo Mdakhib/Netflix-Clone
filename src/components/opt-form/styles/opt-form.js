@@ -40,10 +40,10 @@ export const Button = styled.button`
     @media (max-width: 1000px) {
       width: 16px;
     }
+  }
     &:hover {
       background: #f40612;
     }
-  }
   @media (max-width: 1000px) {
     height: 50px;
     font-size: 16px;
