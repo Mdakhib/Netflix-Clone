@@ -1,23 +1,39 @@
 /* eslint-disable react/no-unescaped-entities */
-/* eslint-disable no-undef */
-/* eslint-disable no-unused-vars */
-import React, { isValidElement, useState } from "react";
+import React, { useContext, useState } from "react";
+import { FirebaseContext } from "../context/firebase";
 import { HeaderContainer } from "../containers/header";
 import { FooterContainer } from "../containers/footer";
 import { Form } from "../components";
 
 export default function Signin() {
-  const [emailAddress, setemailAddress] = useState('');
-  const [password, setpassword] = useState('');
-  const [error, seterror] = useState('');
+  const { firebase } = useContext(FirebaseContext);
+  const [emailAddress, setemailAddress] = useState("");
+  const [password, setpassword] = useState("");
+  const [error, setError] = useState("");
 
   const isInvalid = password === "" || emailAddress === "";
 
   const handleSignin = (event) => {
     event.preventDefault();
+
+    //firebase work here!
+
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(emailAddress, password)
+      .then(() => {
+      //push to the browse page
+      })
+      .catch((error) => {
+        setemailAddress('')
+        setpassword('')
+        setError(error.message)
+    })
+
+
+
   };
 
-  //firebase work here!
 
   return (
     <>
@@ -37,7 +53,7 @@ export default function Signin() {
               placeholder="Password"
               autoComplete="off"
               value={password}
-              type='password'
+              type="password"
               onChange={({ target }) => setpassword(target.value)}
             />
             <Form.Submit disabled={isInvalid} type="submit">
