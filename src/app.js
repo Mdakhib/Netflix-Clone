@@ -3,7 +3,7 @@ import React from "react";
 import { Route, BrowserRouter as Router } from "react-router-dom";
 import * as ROUTES from "./constants/routes";
 import { Home, Browse, Signin, Signup } from "./pages";
-import { IsUserRedirect } from "./helpers/routes";
+import { IsUserRedirect, ProtectedRoute } from "./helpers/routes";
 export default function App() {
   const user  =  {};
   return (
