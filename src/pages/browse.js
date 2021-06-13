@@ -1,5 +1,6 @@
 import React from "react";
 import { useContent } from "../hooks";
+import selectionFilter from "../utiles/selection-filter";
 
 export default function Browse() {
   //we need the series and the films
