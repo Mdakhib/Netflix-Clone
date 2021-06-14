@@ -9,9 +9,13 @@ import * as ROUTES from '../constants/routes'
 import logo from '../logo.svg'
 
 export function BrowseContainer({ slides }) {
+  const [category, SetCategory] = useState("series");
   const [searchTerm, setSearchTerm] = useState("");
   const [profile, setProfile] = useState({});
   const [loading, setLoading] = useState(true);
+  const [slideRows, setSlideRows] = useState([]);
+
+
   const { firebase } = useContext(FirebaseContext);
   const user = firebase.auth().currentUser || {};
 
@@ -21,6 +25,14 @@ export function BrowseContainer({ slides }) {
     }, 3000);
   }, [[profile.displayName]]);
 
+
+
+  useEffect(() => {
+    setSlideRows(slides[category]);
+  }, [slides, category]);
+
+  
+
   return profile.displayName ? (
     <>
       {loading ? <Loading src={user.photoURL} /> : <Loading.ReleaseBody />}
@@ -29,8 +41,18 @@ export function BrowseContainer({ slides }) {
         <Header.Frame>
           <Header.Group>
             <Header.Logo to={ROUTES.HOME} src={logo} alt="Netflix" />
-            <Header.TextLink>Series</Header.TextLink>
-            <Header.TextLink>Films</Header.TextLink>
+            <Header.TextLink
+              active={category === "series" ? "true" : "false"}
+              onClick={() => SetCategory("series")}
+            >
+              Series
+            </Header.TextLink>
+            <Header.TextLink
+              active={category === "films" ? "true" : "false"}
+              onClick={() => SetCategory("films")}
+            >
+              Films
+            </Header.TextLink>
           </Header.Group>
           <Header.Group>
             <Header.Search
@@ -65,6 +87,12 @@ export function BrowseContainer({ slides }) {
           <Header.PlayButton>Play</Header.PlayButton>
         </Header.Feature>
       </Header>
+
+
+
+      <Card.Group>
+        
+      </Card.Group>
     </>
   ) : (
     <SelectProfileContainer user={user} setProfile={setProfile} />
