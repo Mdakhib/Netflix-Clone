@@ -77,3 +77,18 @@ Card.Item = function CardItem({ item, children, ...restProps }) {
 Card.Image = function CardImage({ ...restProps }) {
   return <Image {...restProps} />;
 };
+
+
+Card.Feature = function CardFeature({ children, ...restProps, category }) {
+  const { showFeature, itemFeature, setShowFeature } = useContext(FeatureContext);
+  return showFeature ? (<Feature src={`/images/${category}/${itemFeature.genre}/${itemFeature.slug}/large.jpg`}>
+    <Content>
+      <FeatureTitle>{itemFeature.title} </FeatureTitle>
+      <FeatureText>{itemFeature.title} </FeatureText>
+      <FeatureClose onClick={() => setShowFeature(false)}>
+        <img src="/public/images/icons/close.png" alt="Close" />
+      </FeatureClose>
+    </Content>
+  </Feature>
+  ) : null;
+}
