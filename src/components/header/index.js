@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { useState } from "react";
 import { Link as ReactRouterLink } from "react-router-dom";
@@ -24,8 +23,6 @@ export default function Header({ bg = true, children, ...restProps }) {
   return bg ? <Background {...restProps}>{children} </Background> : children;
 }
 
-
-
 Header.Feature = function HeaderFeature({ children, ...restProps }) {
   return <Feature {...restProps}>{children} </Feature>;
 };
@@ -50,24 +47,21 @@ Header.Search = function HeaderSeacrh({
   setSearchTerm,
   ...restProps
 }) {
-
-
   const [searchActive, setSearchActive] = useState(false);
-  
-  
+
   return (
     <Search {...restProps}>
       <SearchIcon
-        onClick={() => setSearchActive((searchActive) => !setSearchActive)}
+        onClick={() => setSearchActive((searchActive) => !searchActive)}
       >
         <img src="/images/icons/search.png" alt="search" />
       </SearchIcon>
-        <SearchInput
-          value={searchTerm}
-          onChange={({ target }) => setSearchTerm(target.value)}
-          placeholder="Search films and series"
-          active={searchActive}
-        />
+      <SearchInput
+        value={searchTerm}
+        onChange={({ target }) => setSearchTerm(target.value)}
+        placeholder="Search films and series"
+        active={searchActive}
+      />
     </Search>
   );
 };
@@ -76,13 +70,9 @@ Header.Picture = function HeaderPicture({ src, ...restProps }) {
   return <Picture {...restProps} src={`/images/users/${src}.png`} />;
 };
 
-
-
-
 Header.Frame = function HeaderFrame({ children, ...restProps }) {
   return <Container {...restProps}>{children} </Container>;
 };
-
 
 Header.Group = function HeaderGroup({ children, ...restProps }) {
   return <Group {...restProps}>{children} </Group>;
@@ -107,4 +97,3 @@ Header.Logo = function HeaderLogo({ to, ...restProps }) {
     </ReactRouterLink>
   );
 };
-
