@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import React from "react";
+import React, { useState } from "react";
 import { Link as ReactRouterLink } from "react-router-dom";
 import {
   Background,
@@ -14,6 +15,9 @@ import {
   Picture,
   Profile,
   Dropdown,
+  Search,
+  SearchIcon,
+  SearchInput,
 } from "./styles/header";
 
 export default function Header({ bg = true, children, ...restProps }) {
@@ -39,6 +43,33 @@ Header.Dropdown = function HeaderDropdown({ children, ...restProps }) {
 
 Header.Profile = function HeaderProfile({ children, ...restProps }) {
   return <Profile {...restProps}>{children} </Profile>;
+};
+
+Header.Search = function HeaderSeacrh({
+  searchTerm,
+  setSearchTerm,
+  ...restProps
+}) {
+
+
+  const [searchActive, setSearchActive] = useState(false);
+  
+  
+  return (
+    <Search {...restProps}>
+      <SearchIcon
+        onClick={() => setSearchActive((searchActive) => !setSearchActive)}
+      >
+        <img src="/images/icons/search.png" alt="search" />
+      </SearchIcon>
+        <SearchInput
+          value={searchTerm}
+          onChange={({ target }) => setSearchTerm(target.value)}
+          placeholder="Search films and series"
+          active={searchActive}
+        />
+    </Search>
+  );
 };
 
 Header.Picture = function HeaderPicture({ src, ...restProps }) {
