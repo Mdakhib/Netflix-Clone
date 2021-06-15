@@ -68,7 +68,7 @@ export function BrowseContainer({ slides }) {
                   <Header.TextLink>{user.displayName} </Header.TextLink>
                 </Header.Group>
                 <Header.Group>
-                  <Header.TextLink onClick={() => firebase.auth().signout()}>
+                  <Header.TextLink onClick={() => firebase.auth().signOut()}>
                     Sign out
                   </Header.TextLink>
                 </Header.Group>
@@ -108,16 +108,12 @@ export function BrowseContainer({ slides }) {
               ))}
             </Card.Entities>
 
-
-
             <Card.Feature category={category}>
               <Player>
                 <Player.Button />
                 <Player.Video src="/videos/bunny.mp4" />
               </Player>
             </Card.Feature>
-
-            
           </Card>
         ))}
       </Card.Group>
